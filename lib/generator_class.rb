@@ -21,14 +21,12 @@ class TestGenerator
   # attr_accessor lets us manipulate these variable from outside
   # of the object with ease.
   ###
-
   attr_accessor :data_map, :test_map, :template
 
   ###
   # The function initialize will run at new instanitiation of our class.
   # It will then set the variables defined within it.
   ###
-
   def initialize(converted_slug, path_to_test, data)
     # the run string inside the test
     @run_string = "run bash #{converted_slug}.sh"
@@ -57,7 +55,6 @@ class TestGenerator
   # This method puts each object in the cases object from the parsed json
   # into the array @test_map for easy iteration in the template files
   ###
-
   def get_test_map
     @test_map = Array.new
     @data_map["cases"].each do |hash|
@@ -74,7 +71,6 @@ class TestGenerator
   #
   # See the docs here TODO for more information about this.
   ###
-
   def render
     ERB.new(@template, nil, '-').result(binding)
   end
@@ -84,7 +80,6 @@ class TestGenerator
   # it doesn't exist we moved it with the wrapper; remember?
   # Write the output of our render method from above to the file.
   ###
-
   def save
     File.open(@test_name, "w+") do |file|
       file.write(render)
