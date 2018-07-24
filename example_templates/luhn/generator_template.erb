@@ -1,0 +1,13 @@
+#!/usr/bin/env bats
+
+# Version = <%= @data_map["version"] %>
+<% for test in @test_map do %>
+<%# set input so we can access its values -%>
+<% input = test["input"] -%>
+<%# get the test header -%>
+@test "<%= test["description"] %>" {
+  <%= @run_string %> "<%= input["value"] %>"
+  [ "$status" -eq 0 ]
+  [ "$output" == "<%= test["expected"] %>" ]
+}
+<% end -%>
