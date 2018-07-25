@@ -1,0 +1,31 @@
+#!/usr/bin/env bats
+
+# Version = <%= @data_map["version"] %>
+<% for type in @test_map do %>
+<%# display a message for each category of tests -%>
+# Test to <%= type["description"] -%>
+<%# For this test we need to set a flag based on the type of test -%>
+<%# the flags need a space in front of them to keep from having trailing
+whitespace when they aren't used -%>
+<%
+flag = nil
+if type["description"].start_with?("Square")
+  flag = " -S"
+elsif type["description"].start_with?("Sum")
+  flag = " -s"
+end
+-%>
+<%# get the hash for each test from the cases array -%>
+<% for test in type["cases"] do -%>
+<%# set input so we can acces the value of "phrase -%>
+<% input = test["input"] -%>
+<%# get the test header %>
+@test "<%= test["description"] %>" {
+  skip
+  <%= @run_string %> <%= input["number"] %><%= flag %>
+  [ "$status" -eq 0 ]
+  [ "$output" = "<%= test["expected"] %>" ]
+}
+<% end -%>
+<% end -%>
+
