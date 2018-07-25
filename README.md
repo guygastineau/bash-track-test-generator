@@ -1,6 +1,6 @@
 # bash-track-test-generator
 
-## This is here for other contributors to the bash track on erxercism.io
+## This is here for other contributors to the bash track on exercism.io
 
 - The files are kept in directories that match the directories they have in `exercism/bash`.
 - There is no exercises directory here, so examples of templates will go into their own folder in `example_templates`.
