@@ -10,7 +10,7 @@
 SLUG="$1"
 PATH_TO_CANONICAL_DATA="../problem-specifications/exercises/$SLUG/"
 PATH_TO_EXERCISE="exercises/$SLUG/"
-PATH_TO_TEST="${PATH_TO_EXERCISE}${SLUG/-/_}_test.sh"
+PATH_TO_TEST="${PATH_TO_EXERCISE}${SLUG//-/_}_test.sh"
 
 usage () {
   echo "$0 <exercise-slug>" && exit 1
@@ -116,7 +116,7 @@ main () {
 
   data="${PATH_TO_CANONICAL_DATA}canonical-data.json"
 
-  ruby scripts/test_generator.rb "${SLUG/-/_}" "$PATH_TO_EXERCISE" "$data"
+  ruby scripts/test_generator.rb "${SLUG//-/_}" "$PATH_TO_EXERCISE" "$data"
 
   catch_ruby_error
 
