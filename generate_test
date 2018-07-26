@@ -1,0 +1,31 @@
+#!/bin/ruby
+
+require_relative './lib/generator_class'
+require_relative './lib/module_lib'
+
+class TestGenerator
+  include FetchFile
+end
+
+slug = ARGV[0]
+
+new_test = TestGenerator.new(slug)
+
+new_test.template = File.read("./exercises/#{slug}/template.erb")
+
+unless File.file?("./exercises/#{slug}/#{new_test.converted_slug}.sh")
+  new_test.get_example(slug)
+end
+
+begin
+  new_test.generate
+rescue
+  puts "There seems to have been a problem.
+    Please check your template file for errors."
+  exit 1
+end
+
+puts "Everything seems to have worked. Please verify that your test
+  has been generated properly and check the example.sh against it."
+
+exit
