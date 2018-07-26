@@ -1,0 +1,20 @@
+#!/usr/bin/env bats
+
+<% for test in @test_map do -%>
+<%# set input so we can access its values -%>
+<% input = test["input"] -%>
+<%# get the test header -%>
+@test "<%= test["description"] %>" {
+  skip
+  <%= @run_string %> "<%= input["strand1"] %>" "<%= input["strand2"] %>"
+<% if Hash === test["expected"] -%>
+<% expected = test["expected"] -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "<%= expected["error"] %>" ]
+}
+<% else -%>
+  [ "$status" -eq 0 ]
+  [ "$output" == "<%= test["expected"] %>" ]
+}
+<% end %>
+<% end -%>
