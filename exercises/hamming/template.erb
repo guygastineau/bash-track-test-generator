@@ -14,7 +14,7 @@
 }
 <% else -%>
   [ "$status" -eq 0 ]
-  [ "$output" == "<%= test["expected"] %>" ]
+  [ "$output" -eq <%= test["expected"] %> ]
 }
 <% end %>
 <% end -%>
