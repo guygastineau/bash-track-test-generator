@@ -18,3 +18,9 @@
 }
 <% end %>
 <% end -%>
+@test "no input" {
+  skip
+  <%= @run_string %>
+  [ "$status" -eq 1 ]
+  [ "$output" == "Usage: hamming.sh <string1> <string2>" ]
+}

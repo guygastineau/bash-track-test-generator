@@ -1,7 +1,7 @@
 #!/usr/bin/env bats
 
 @test "empty strands" {
-  skip
+  #skip
   run bash hamming.sh "" ""
   [ "$status" -eq 0 ]
   [ "$output" -eq 0 ]
@@ -105,3 +105,9 @@
   [ "$output" == "left and right strands must be of equal length" ]
 }
 
+@test "no input" {
+  skip
+  run bash hamming.sh
+  [ "$status" -eq 1 ]
+  [ "$output" == "Usage: hamming.sh <string1> <string2>" ]
+}
