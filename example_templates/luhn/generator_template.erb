@@ -1,7 +1,6 @@
 #!/usr/bin/env bats
 
-# Version = <%= @data_map["version"] %>
-<% for test in @test_map do %>
+<% for test in @test_map do -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
