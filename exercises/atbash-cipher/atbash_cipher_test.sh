@@ -1,8 +1,6 @@
 #!/usr/bin/env bats
 
-# Version = 1.1.0
-
-# Test to encode
+# encode
 @test "encode yes" {
   run bash atbash_cipher.sh encode "yes"
   [ "$status" -eq 0 ]
@@ -50,8 +48,7 @@
   [ "$status" -eq 0 ]
   [ "$output" = "gsvjf rxpyi ldmul cqfnk hlevi gsvoz abwlt" ]
 }
-
-# Test to decode
+# decode
 @test "decode exercism" {
   run bash atbash_cipher.sh decode "vcvix rhn"
   [ "$status" -eq 0 ]

@@ -12,6 +12,8 @@
 # at TODO
 ###
 
+require 'erb'
+
 # make the class
 class TestGenerator
 
@@ -21,24 +23,24 @@ class TestGenerator
   # attr_accessor lets us manipulate these variable from outside
   # of the object with ease.
   ###
-  attr_accessor :data_map, :test_map, :template
+  attr_accessor :data_map, :test_map, :template, :converted_slug
 
   ###
   # The function initialize will run at new instanitiation of our class.
   # It will then set the variables defined within it.
   ###
-  def initialize(converted_slug, path_to_test, data)
+  def initialize(slug)
+    # convert the slug
+    @converted_slug = convert_slug(slug)
+
     # the run string inside the test
     @run_string = "run bash #{converted_slug}.sh"
 
     # the name for the test file
-    @test_name = path_to_test
-
-    # this contains the raw json from our canonical-data.json file
-    json_source = File.read(data)
+    @test_name = "./exercises/#{slug}/#{@converted_slug}_test.sh"
 
     # this converts the raw json to a ruby struct
-    @data_map = JSON.parse(json_source)
+    @data_map = get_canonical(slug)
 
     # this private method gets us to the proper layer in the nested struct
     get_test_map
@@ -50,6 +52,9 @@ class TestGenerator
   end
 
   private # private methods can only be accessed by the object itself
+  def convert_slug(slug)
+    slug.gsub('-', '_')
+  end
 
   ###
   # This method puts each object in the cases object from the parsed json
