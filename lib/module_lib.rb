@@ -27,8 +27,8 @@ module FetchFile
     begin
       example = open(url).read
     rescue
-      puts "An error occured while fetching the example file."
-      exit 1
+      puts "An error occured while fetching the example file.
+        Continuing without it in case this is a new exercise."
     end
 
     example_path = "./exercises/#{slug}/#{@converted_slug}.sh"
