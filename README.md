@@ -1,6 +1,6 @@
 # bash-track-test-generator
 
-## This is here for other contributors to the bash track on erxercism.io
+## This is here for other contributors to the bash track on exercism.io
 
 Read below for instruction on using this program
 
