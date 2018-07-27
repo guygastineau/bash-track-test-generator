@@ -1,0 +1,38 @@
+[
+  {
+    "description": "No input should return an error",
+    "property": "error",
+    "input": {
+      "year": null
+    },
+    "expected": "Usage: leap.sh <year>"
+  },
+  {
+    "description": "Too many arguments should return an error",
+    "property": "error",
+    "input": {
+      "year": [
+        "2016",
+        "4562",
+        "4566"
+      ]
+    },
+    "expected": "Usage: leap.sh <year>"
+  },
+  {
+    "description": "Float number input should return an error",
+    "property": "error",
+    "input": {
+      "year": "2016.54"
+    },
+    "expected": "Usage: leap.sh <year>"
+  },
+  {
+    "description": "Alpha input should return an error",
+    "property": "error",
+    "input": {
+      "year": "abcd"
+    },
+    "expected": "Usage: leap.sh <year>"
+  }
+]

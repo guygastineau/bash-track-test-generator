@@ -10,6 +10,9 @@ end
 # Grab the slug from ARGV
 slug = ARGV[0]
 
+# Grab ARGV[1] if it exists
+override = 1 if ARGV[1] == "override"
+
 # Instantaite our class object with the input
 new_test = TestGenerator.new(slug)
 
@@ -17,7 +20,10 @@ new_test = TestGenerator.new(slug)
 base_path, file_ext = "./exercises/#{slug}/", "#{new_test.converted_slug}"
 
 # Load the template into the object
-new_test.template = File.read("#{base_path}/template.erb")
+new_test.template = File.read("#{base_path}template.erb")
+
+# Load the override into the existing json
+new_test.load_override("#{base_path}override.json")
 
 # Lets grab the example.sh unless it exists already renamed
 unless File.file?("#{base_path}#{file_ext}.sh")

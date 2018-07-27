@@ -46,6 +46,12 @@ class TestGenerator
     get_test_map
   end
 
+  # load the override json if the option is passed
+  def load_override(path)
+    override_source = JSON.parse(File.read(path))
+    override_source.each {|hash| @test_map << hash}
+  end
+
   # descriptive name for calling the private method 'save'
   def generate
     save

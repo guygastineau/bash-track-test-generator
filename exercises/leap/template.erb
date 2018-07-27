@@ -1,0 +1,23 @@
+#!/usr/bin/env bats
+
+<%# access the arrays inside @test_map -%>
+<% for test in @test_map do -%>
+<%# set input so we can acces the value of "phrase -%>
+<% input = test["input"] -%>
+<%# get the test header -%>
+@test "<%= test["description"] %>" {
+  skip
+<% if Array === input["year"] -%>
+  <%= @run_string %> <%= input["year"].join(" ") %>
+<% else -%>
+  <%= @run_string %> <%= input["year"] %>
+<% end -%>
+<% if test["property"] == "error" -%>
+  [ "$status" -eq 1 ]
+<% else -%>
+  [ "$status" -eq 0 ]
+<% end -%>
+  [ "$output" == "<%= test["expected"] %>" ]
+}
+
+<% end -%>
