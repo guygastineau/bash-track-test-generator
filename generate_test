@@ -23,7 +23,7 @@ base_path, file_ext = "./exercises/#{slug}/", "#{new_test.converted_slug}"
 new_test.template = File.read("#{base_path}template.erb")
 
 # Load the override into the existing json
-new_test.load_override("#{base_path}override.json")
+new_test.load_override("#{base_path}override.json") if override == 1
 
 # Lets grab the example.sh unless it exists already renamed
 unless File.file?("#{base_path}#{file_ext}.sh")
