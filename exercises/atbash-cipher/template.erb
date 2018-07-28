@@ -2,17 +2,19 @@
 
 <% for type in @test_map do -%>
 <%# display a message for each category of tests -%>
-# <%= type["description"] -%>
+# <%= type["description"] %>
 <%# get the hash for each test from the cases array -%>
 <% for test in type["cases"] do -%>
 <%# set input so we can acces the value of "phrase -%>
 <% input = test["input"] -%>
-<%# get the test header %>
+<%# get the test header -%>
 @test "<%= test["description"] %>" {
+  skip
   <%= @run_string %> <%= test["property"] %> "<%= input["phrase"] %>"
   [ "$status" -eq 0 ]
   [ "$output" = "<%= test["expected"] %>" ]
 }
+
 <% end -%>
 <% end -%>
 
