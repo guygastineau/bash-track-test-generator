@@ -3,6 +3,7 @@
 <% for type in @test_map do -%>
 <%# there is only one test type now but lets get its description anyway -%>
 # <%= type["description"] %>
+
 <%# now lets get all the tests from the cases object in type -%>
 <% for test in type["cases"] do -%>
 <%# set input so we can access its values -%>
@@ -11,10 +12,11 @@
 @test "<%= test["description"] %>" {
   skip
   <%= @run_string %> "<%= input["sentence"] %>"
-<% if test["expected"] == true -%>
   [ "$status" -eq 0 ]
+<% if test["expected"] == true -%>
+  [ "$output" == "true" ]
 <% else -%>
-  [ "$status" -eq 1 ]
+  [ "$output" == "false" ]
 <% end -%>
 }
 
