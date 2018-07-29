@@ -1,14 +1,26 @@
 #!/usr/bin/env bats
 
-<% for test in @test_map do -%>
+<% for type in @test_map do -%>
+<%# get the description for the tests -%>
+# <%= type["description"] %>
+
+<% for test in type["cases"] -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> "<%= input["strand"] %>"
+<% expected = test["expected"] -%>
+<% if expected.key?("error") -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "<%= expected["error"] %>" ]
+<% else -%>
   [ "$status" -eq 0 ]
-  [ "$output" == "<%= test["expected"] %>" ]
+  [ "$output" == $'A: <%= expected["A"] %>\nC: <%= expected["C"] -%>
+\nG: <%= expected["G"] %>\nT: <%= expected["T"] %>' ]
+<% end -%>
 }
 
+<% end -%>
 <% end -%>
