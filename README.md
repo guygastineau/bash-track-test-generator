@@ -64,7 +64,3 @@ which this works would be my hero!
 - There will more tutorials coming soon. Some walking through the codebase
   and some exploring other features like the override.
 
-#### I still need to work on the documentation for this project
-- For now, let it suffice to know that If you have the `exercism/bash` and `exercism/problem-specifications` repos in parallel on your local developement envorinment then you can generate a test by making a template, putting it in the `.meta` folder of the exercise, and running `bin/generate_test <exercise-slug>`.  If there is a problem in the template that causes `script/test_generator.rb` to exit with a non-zero status then the bash wrapper will revert the test to its state from before the generator began.
-
-- Let me know if you have any questions or suggestions!
