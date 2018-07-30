@@ -1,14 +1,21 @@
 #!/usr/bin/env bats
 
-<% for test in @test_map do -%>
+<% for type in @test_map do -%>
 <%# set input so we can access its values -%>
+<% for test in type["cases"] do -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> "<%= input["phrase"] %>"
+<% if test["expected"] -%>
   [ "$status" -eq 0 ]
   [ "$output" == "<%= test["expected"] %>" ]
+<% else -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "Invalid number.  [1]NXX-NXX-XXXX N=2-9, X=0-9" ]
+<% end -%>
 }
 
+<% end -%>
 <% end -%>
