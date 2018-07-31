@@ -25,7 +25,7 @@
 <% end -%>
 <% else -%>
 <%# Now lets deal with the last case -%>
-@test "<%= type["description"] %>" {
+@test "<%= type["description"].capitalize %>" {
   skip
   <%= @run_string -%> -A
   [ "$status" -eq 0 ]
