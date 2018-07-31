@@ -17,7 +17,7 @@ if [[ "$INPUT" == "-A" ]]; then
 elif [[ "$1" -lt 1  || "$1" -gt 64  ]]; then
 
     echo "Error: invalid input"
-    exit 1;
+    exit 1
 
 else
 get_grains "$INPUT"
