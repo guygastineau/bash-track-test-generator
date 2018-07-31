@@ -6,11 +6,7 @@
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
-<% if test["description"] !~ /\D/ -%>
-@test "Square <%= test["description"] %>" {
-<% else -%>
-@test "<%= test["description"].capitalize %>" {
-<% end -%>
+@test "<%= test["description"] %>" {
   skip
   <%= @run_string %> <%= input["square"] %>
 <% if test["expected"] != -1 -%>
@@ -25,9 +21,9 @@
 <% end -%>
 <% else -%>
 <%# Now lets deal with the last case -%>
-@test "<%= type["description"].capitalize %>" {
+@test "<%= type["description"] %>" {
   skip
-  <%= @run_string -%> -A
+  <%= @run_string -%> <%= type["property"] %>
   [ "$status" -eq 0 ]
   [ "$output" == "<%= type["expected"] %>" ]
 }
