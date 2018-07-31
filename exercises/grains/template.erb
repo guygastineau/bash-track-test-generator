@@ -1,14 +1,36 @@
 #!/usr/bin/env bats
 
-<% for test in @test_map do -%>
+<% for type in @test_map do -%>
+<% if type.key?("cases") -%>
+<% for test in type["cases"] do -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
-@test "<%= test["description"] %>" {
+<% if test["description"] !~ /\D/ -%>
+@test "Square <%= test["description"] %>" {
+<% else -%>
+@test "<%= test["description"].capitalize %>" {
+<% end -%>
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> <%= input["square"] %>
+<% if test["expected"] != -1 -%>
   [ "$status" -eq 0 ]
   [ "$output" == "<%= test["expected"] %>" ]
+<% else -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "Error: invalid input" ]
+<% end -%>
 }
 
+<% end -%>
+<% else -%>
+<%# Now lets deal with the last case -%>
+@test "<%= type["description"] %>" {
+  skip
+  <%= @run_string -%> -A
+  [ "$status" -eq 0 ]
+  [ "$output" == "<%= type["expected"] %>" ]
+}
+
+<% end -%>
 <% end -%>
