@@ -3,12 +3,17 @@
 <% for test in @test_map do -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
+<%# set expected so we can access its values -%>
+<% expected = test["expected"] -%>
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> "<%= input["sentence"] %>"
   [ "$status" -eq 0 ]
-  [ "$output" == "<%= test["expected"] %>" ]
+<% expected.each_pair do |key, value| -%>
+  echo $output | grep "<%= key %>: <%= value %>"
+<% end -%>
+  echo $output | wc -w | grep "<%= expected.length * 2 %>"
 }
 
 <% end -%>

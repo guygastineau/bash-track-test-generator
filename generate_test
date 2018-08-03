@@ -32,7 +32,7 @@ end
 
 # If there is already a test here lets save it to 'old_test.sh'
 if File.file?("#{base_path}#{file_ext}_test.sh")
-  File.rename("#{base_path}#{file_ext}_test.sh", "#{base_path}old_test,sh")
+  File.rename("#{base_path}#{file_ext}_test.sh", "#{base_path}old_test.sh")
 end
 
 begin
