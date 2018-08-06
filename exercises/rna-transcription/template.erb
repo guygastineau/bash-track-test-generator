@@ -6,8 +6,12 @@
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> <%= input["dna"] %>
+<% if test["property"] == "error" -%>
+  [ "$status" -eq 1 ]
+<% else -%>
   [ "$status" -eq 0 ]
+<% end -%>
   [ "$output" == "<%= test["expected"] %>" ]
 }
 

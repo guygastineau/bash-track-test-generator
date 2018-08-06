@@ -1,0 +1,26 @@
+[
+  {
+    "description": "Handles invalid character",
+    "property": "error",
+    "input": {
+      "dna": "ACGTXCTTA"
+    },
+    "expected": "Invalid nucleotide detected."
+  },
+  {
+    "description": "Handles completely invalid string",
+    "property": "error",
+    "input": {
+      "dna": "XXXX"
+    },
+    "expected": "Invalid nucleotide detected."
+  },
+  {
+    "description": "Handles partially invalid string",
+    "property": "error",
+    "input": {
+      "dna": "ACGTXCTTAA"
+    },
+    "expected": "Invalid nucleotide detected."
+  }
+]
