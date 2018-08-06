@@ -1,0 +1,10 @@
+[
+  {
+    "description": "no input is silence",
+    "property": "response",
+    "input": {
+      "heyBob": null
+    },
+    "expected": "Fine. Be that way!"
+  }
+]
