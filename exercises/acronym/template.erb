@@ -1,12 +1,12 @@
 #!/usr/bin/env bats
 
-<% for test in @test_map do -%>
+<% for test in @test_map[0]["cases"] do -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> "<%= input["phrase"] %>"
   [ "$status" -eq 0 ]
   [ "$output" == "<%= test["expected"] %>" ]
 }
