@@ -7,8 +7,13 @@
 @test "<%= test["description"] %>" {
   skip
   <%= @run_string %> <%= input["number"] %>
+<% if Hash === test["expected"] -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "Error: <%= test["expected"]["error"] %>" ]
+<% else -%>
   [ "$status" -eq 0 ]
-  [ "$output" == "<%= test["expected"] %>" ]
+  [ "$output" -eq <%= test["expected"] %> ]
+<% end -%>
 }
 
 <% end -%>
