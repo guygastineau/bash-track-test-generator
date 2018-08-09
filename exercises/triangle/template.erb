@@ -1,14 +1,22 @@
 #!/usr/bin/env bats
 
-<% for test in @test_map do -%>
+<% for type in @test_map do -%>
+# Test <%= type["description"] %>
+
+<% for test in type["cases"] -%>
+<% if test["description"].end_with?("floats") -%>
+# Bonus: deal with floats
+
+<% end -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
 @test "<%= test["description"] %>" {
   skip
-  <%= @run_string %> <%= input["number"] %>
+  <%= @run_string %> <%= test["property"] %> <%= input["sides"].join(' ') %>
   [ "$status" -eq 0 ]
   [ "$output" == "<%= test["expected"] %>" ]
 }
 
+<% end -%>
 <% end -%>
