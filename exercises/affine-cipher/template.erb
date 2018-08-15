@@ -1,0 +1,25 @@
+#!/usr/bin/env bats
+
+<% for type in @test_map do -%>
+# <%= type['description'] %>
+
+<% for test in type['cases'] -%>
+<%# set input so we can access its values -%>
+<% input = test['input'] -%>
+<%# get the keys -%> <% a, b = input['key']['a'], input['key']['b'] -%>
+<%# get the test header -%>
+@test "<%= test['description'] %>" {
+  skip
+  <%= @run_string %> <%= test['property'] -%>
+ <%= a %> <%= b %> "<%= input['phrase'] %>"
+<% if Hash === test['expected'] -%>
+  [ "$status" -eq 1 ]
+  [ "$output" == "<%= test['expected']['error'] %>" ]
+<% else -%>
+  [ "$status" -eq 0 ]
+  [ "$output" == "<%= test['expected'] %>" ]
+<% end -%>
+}
+
+<% end -%>
+<% end -%>
