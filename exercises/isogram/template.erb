@@ -1,0 +1,18 @@
+#!/usr/bin/env bats
+
+<% for type in @test_map do -%>
+# <%= type['description'] %>
+
+<% for test in type['cases'] do -%>
+<%# set input so we can access its values -%>
+<% input = test['input'] -%>
+<%# get the test header -%>
+@test "<%= test['description'] %>" {
+  skip
+  <%= @run_string %> "<%= input['phrase'] %>"
+  [ "$status" -eq 0 ]
+  [ "$output" == "<%= test['expected'] %>" ]
+}
+
+<% end -%>
+<% end -%>
