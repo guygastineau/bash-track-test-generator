@@ -1,4 +1,4 @@
-#!/bin/ruby
+#!/usr/bin/env ruby
 
 require_relative './lib/generator_class'
 require_relative './lib/module_lib'
@@ -7,8 +7,20 @@ class TestGenerator
   include FetchFile
 end
 
+def usage_banner
+  puts <<~INFO
+    Usage: ./#{File.basename(__FILE__)} <exercise-slug> [override]
+      exercise-slug:   the slug of the exercise you want to update, ex: 'bob'
+      override:        adds extra tests not included in the problem-specification file, requires a custom JSON file
+  INFO
+
+  exit
+end
+
 # Grab the slug from ARGV
 slug = ARGV[0]
+
+usage_banner unless slug
 
 # Grab ARGV[1] if it exists
 override = 1 if ARGV[1] == "override"
