@@ -1,0 +1,18 @@
+#!/usr/bin/env bats
+
+<% for test in @test_map do -%>
+<%# set input so we can access its values -%>
+<% input = test["input"] -%>
+<%# get the test header -%>
+@test "<%= test["description"] %>" {
+  skip
+  expected="$(cat << EOT
+<%= test['expected'].join("\n") %>
+EOT
+)"
+  <%= @run_string %> <%= input["letter"] %>
+  [ "$status" -eq 0 ]
+  [ "$output" == "$expected" ]
+}
+
+<% end -%>
