@@ -6,7 +6,7 @@
 <%# get the test header -%>
 @test '<%= test['description'] %>' {
   skip
-  <%= @run_string %> <%= input['number'] %>
+  <%= @run_string %> '<%= input['isbn'] %>'
   [ "$status" -eq 0 ]
   [ "$output" == '<%= test['expected'] %>' ]
 }
