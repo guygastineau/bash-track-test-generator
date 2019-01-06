@@ -1,16 +1,16 @@
-#!/usr/bin/env bats
+#!/usr/bin/env bash
 
 <% for test in @test_map do -%>
 <%# set input so we can access its values -%>
 <% input = test["input"] -%>
 <%# get the test header -%>
-@test "<%= test["description"] %>" {
+@test '<%= test["description"] %>' {
   skip
-  <%= @run_string %> "<%= input["strand1"] %>" "<%= input["strand2"] %>"
+  <%= @run_string %> '<%= input["strand1"] %>' '<%= input["strand2"] %>'
 <% if Hash === test["expected"] -%>
 <% expected = test["expected"] -%>
   [ "$status" -eq 1 ]
-  [ "$output" == "<%= expected["error"] %>" ]
+  [ "$output" == '<%= expected["error"] %>' ]
 }
 <% else -%>
   [ "$status" -eq 0 ]
@@ -22,5 +22,5 @@
   skip
   <%= @run_string %>
   [ "$status" -eq 1 ]
-  [ "$output" == "Usage: hamming.sh <string1> <string2>" ]
+  [ "$output" == 'Usage: hamming.sh <string1> <string2>' ]
 }
